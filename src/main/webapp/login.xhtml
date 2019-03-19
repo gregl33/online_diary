@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Sign In</title>
+        <style>
+            .formdiv {
+               margin: 0 auto;
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+
+        <h:form id="loginForm">
+ 
+            <!--<p:message for="loginForm"> </p:message>-->
+                    <h:panelGrid id="loginGrid" class="formdiv" columns="2" cellpadding="5">
+                        <p:outputLabel for="username" value="Username:" />
+                        <h:panelGroup>
+                            <p:inputText id="username"  value="#{loginCtrlMain.username}" required="true"
+                             requiredMessage="Please enter your Username:"/>
+                             <p:message for="username" />
+                        </h:panelGroup>
+
+
+                        <p:outputLabel for="passwordInput" value="Password:" />     
+                        <h:panelGroup>
+                            <p:password id="passwordInput"  value="#{loginCtrlMain.password}" required="true"  
+                            requiredMessage="Please enter your Password"/>
+                            <p:message for="passwordInput" />
+                        </h:panelGroup>
+
+
+                        <p:commandButton value="Sign In" update="loginGrid" ajax="true" action="#{loginCtrlMain.validateUser()}"/>
+                    </h:panelGrid>
+                </h:form>
+
+                <p:commandButton value="Register" immediate="true" action="#{loginCtrlMain.gotoregisterpage()}"/>
+
+    </h:body>
+</html>
+
