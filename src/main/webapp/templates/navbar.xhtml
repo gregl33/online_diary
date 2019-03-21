@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:outputStylesheet name="main.css"/>
+    
+    <h:panelGroup class="navCon">
+        <h:form>  
+            <p:growl id="messages"/>
+            <p:menubar>
+                <p:menuitem value="Home" action="#{homeCtrl.goHome()}" icon="fa fa-home"/>
+
+                <p:menuitem value="Contacts" icon="fa fa-fw fa-users" action="#{searchCtrl.getAllUsers()}"/>
+
+                <p:submenu label="Events" icon="fa fa-fw fa-calendar">
+                    <p:menuitem value="New" action="#{eventsCtrl.goEvents()}"/>
+                    <p:separator />
+                    <p:menuitem value="Upcoming" action="#{eventsCtrl.goUpcomingEvents()}"/>
+                </p:submenu>
+
+                <p:menuitem value="Profile" action="#{personCtrl.getUserDetails()}" icon="fa fa-user"/>
+
+                <f:facet name="options">
+                    <p:commandButton value="Logout" icon="fa fa-sign-out" action="#{loginCtrlMain.loggout()}"/>
+                </f:facet>
+            </p:menubar>
+        </h:form>
+    </h:panelGroup>
+</html>
+

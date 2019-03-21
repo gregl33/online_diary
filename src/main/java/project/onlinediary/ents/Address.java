@@ -7,13 +7,10 @@ package project.onlinediary.ents;
 
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -30,26 +27,32 @@ public class Address implements Serializable {
     
     
     
-//     @OneToMany(mappedBy = "home")
-//    private List<Person> residents;
+    @OneToOne(mappedBy = "home")
+    private Person residents;
     
-        private String address_line_1;
-        private String address_line_2;
-        private String town;
-        private String county;
-        private String postcode;
-        
+    private String house_name;
+    private String address_line_1;
+    private String address_line_2;
+    private String town;
+    private String county;
+    private String postcode;
 
-           
-//        @OneToOne(mappedBy = "home")
-//         private Person resident;
-//        
-//        @OneToOne(mappedBy = "person")
-//         private Long personid;
-         @OneToOne//(mappedBy = "personid")
-         private Person resident;
-        
-        
+//    public List<Person> getResidents() {
+//        return residents;
+//    }
+//
+//    public void setResidents(List<Person> residents) {
+//        this.residents = residents;
+//    }
+
+    public String getHouse_name() {
+        return house_name;
+    }
+
+    public void setHouse_name(String house_name) {
+        this.house_name = house_name;
+    }
+
     public String getAddress_line_1() {
         return address_line_1;
     }
@@ -90,22 +93,16 @@ public class Address implements Serializable {
         this.postcode = postcode;
     }
 
-    public Long getAddressid() {
-        return id;
+    public Person getResidents() {
+        return residents;
     }
 
-    public void setAddressid(Long addressid) {
-        this.id = addressid;
+    public void setResidents(Person residents) {
+        this.residents = residents;
     }
+        
 
-    public Person getResident() {
-        return resident;
-    }
-
-    public void setResident(Person resident) {
-        this.resident = resident;
-    }
-
+           
 
 
 

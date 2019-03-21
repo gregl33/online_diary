@@ -5,16 +5,10 @@
  */
 package project.onlinediary.bus;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.xml.bind.DatatypeConverter;
 import project.onlinediary.ents.Person;
-import project.onlinediary.pers.AddressFacade;
 import project.onlinediary.pers.PersonFacade;
 
 
@@ -32,9 +26,6 @@ public class PersonService {
     
     @EJB
     private PersonFacade pf;
-    @EJB
-    private AddressFacade af;
-    
     
         public Person createNewPerson(Person p) {//throws BusinessException {
         //check things: duplicates
@@ -60,5 +51,20 @@ public class PersonService {
 //        }
     }
     
+        
+    public Person updatePerson(Person p) {
+        pf.edit(p);
+        return p;
+    }
+    
+    public List<Person> getAllPerson() {
+        return pf.findAll();
+    }
+       
+    public List<Person> getPersonBy(String searchfor,Long userid) {
+        return pf.findByAll(searchfor,userid);
+    }
+        
+        
     
 }

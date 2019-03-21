@@ -10,7 +10,12 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
+import project.onlinediary.bus.AddressService;
+import project.onlinediary.bus.PersonService;
 import project.onlinediary.bus.loginService;
+import project.onlinediary.ents.Address;
+import project.onlinediary.ents.Person;
 
 
 
@@ -24,11 +29,35 @@ public class LoginCtrl {
     
     @EJB
     private loginService ls;
-        
+    @EJB
+    private PersonService ps;
+    @EJB
+    private AddressService as;
+    
+    
+    private boolean editMode = true;
+
     private String username;
     private String password;
     
+    private Person newUser = new Person();
+    private Address newAddress = new Address();
    
+    
+    
+//    public void edit() {
+//        System.out.println("EDIT MODE");
+//        this.setEditMode(!this.editMode);
+//    }
+
+    public boolean isEditMode() {
+        return editMode;
+    }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+    
     public LoginCtrl() {
     }
 
@@ -48,23 +77,57 @@ public class LoginCtrl {
         this.password = password;
     }
     
-    public String gotoregisterpage(){
-        System.out.println("HI");
-        return "register";
+
+    public Person getNewUser() {
+        return newUser;
+    }
+
+    public void setNewUser(Person newUser) {
+        this.newUser = newUser;
+    }
+    public Address getNewAddress() {
+        return newAddress;
+    }
+
+    public void setNewAddress(Address newAddress) {
+        this.newAddress = newAddress;
     }
     
-    
+        public String registerUser() {
+//          as.createNewAddress(newAddress);
+//        newUser.setHome(as.createNewAddress(newAddress));
+//        ps.createNewPerson(newUser);
+//          newUser.setHome(as.createNewAddress(newAddress));
+//        long tempid = 
+
+//        
+        newUser.setHome(as.createNewAddress(newAddress));
+        ps.createNewPerson(newUser);
+//        newAddress.setPersonid_(tempid);
+//        newAddress.setResident(ps.createNewPerson(newUser));
+//        as.createNewAddress(newAddress);
+        
+        return "login?faces-redirect=true";
+    }
+        
     	//validate login
 	public String validateUser() {
                 System.out.println("username: " + username);
                 System.out.println("password: "+password);
 
-		boolean valid = ls.validate(username, password);
-                System.out.println("valid: " + valid);
-		if (valid) {
+//		boolean valid = ls.validate(username, password);
+		Person userLoggedin = ls.validate(username, password);
+
+//                System.out.println("valid: " + valid);
+		if (userLoggedin != null) {
 //			HttpSession session = SessionUtils.getSession();
 //			session.setAttribute("username", user);
-			return "home";
+
+                    FacesContext facesContext = FacesContext.getCurrentInstance();
+                    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+                    session.setAttribute("user", userLoggedin);	
+                    
+                    return "home?faces-redirect=true";
 		} else {
 //			FacesContext.getCurrentInstance().addMessage(
 //					null,
@@ -72,10 +135,28 @@ public class LoginCtrl {
 //							"Incorrect Username and Passowrd",
 //							"Please enter correct username and Password"));
                         
-                  FacesContext.getCurrentInstance().addMessage("loginError", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contact admin."));
-                  
+                  FacesContext.getCurrentInstance().addMessage("loginForm:username", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Incorrect Username or Passowrd"));
+                  FacesContext.getCurrentInstance().addMessage("loginForm:passwordInput", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Incorrect Username or Passowrd"));
+
 			return "login";
 		}
 
         }
+        
+        public String loggout(){
+            
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+//            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+//            if(session != null){
+//                session.removeAttribute("user");
+//            }
+            facesContext.getExternalContext().invalidateSession();
+                
+            return "login?faces-redirect=true";
+        }
+        
+        public String gotoregisterpage(){
+//            this.edit();
+            return "register?faces-redirect=true";
+    }
 }

@@ -26,7 +26,7 @@ import project.onlinediary.ents.Person;
 @Stateless
 public class PersonFacade extends AbstractFacade<Person> {
 
-    @PersistenceContext(unitName = "project_onlineDiary_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName = "onlineDiary_persistance")
     private EntityManager em;
 
     @Override
@@ -56,6 +56,23 @@ public class PersonFacade extends AbstractFacade<Person> {
     }
     
     
+    public List<Person> findByAll(String searchfor, Long userid) {
+        Query q = em.createQuery("SELECT p From Person p "
+                + "WHERE p.id != :userid AND "
+                + "(lower(p.lastname) LIKE lower(:name)"
+                + "OR lower(p.firstname) LIKE lower(:name)"
+                + "OR lower(p.email) LIKE lower(:name)"
+                + "OR lower(p.phonenumber) LIKE lower(:name))"
+
+        );
+
+        q.setParameter("name", "%" + searchfor + "%");
+        q.setParameter("userid", userid);
+
+        List<Person> personsFound = q.getResultList();
+        return personsFound;
+    }
+    
     
     public String genHashPass(String pass){
         
@@ -70,6 +87,5 @@ public class PersonFacade extends AbstractFacade<Person> {
         String hex = DatatypeConverter.printHexBinary(hash);
         return hex;
     }
-            
-    
+           
 }

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Contacts</title>
+    </h:head>
+    <h:body>
+
+        <ui:include src="templates/navbar.xhtml"></ui:include>
+        <h:form id="searchFrom">
+
+            <h:panelGroup class="contactCon">
+
+                <h:panelGroup class="searchContactCon">
+                    <p:inputText class="searchEventContactInput" required="false" placeholder="Search">
+                            <p:ajax event="keyup" listener="#{searchCtrl.searchForContactsAjax}" 
+                                    process="@this" update=":searchFrom:contactTable"></p:ajax>
+                    </p:inputText>  
+                </h:panelGroup>
+
+                <h:panelGroup class="contactTableCon">
+                    <p:dataTable id="contactTable" value="#{searchCtrl.contactUsers}" var="user" paginator="true" rows="10" styleClass="paginated" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+                        <p:column style="width:20%" headerText="Username ">
+                            <h:outputText escape="false" style="white-space:pre-line;" value="#{user.username}"/>
+                        </p:column>
+
+                        <p:column style="width:15%" headerText="First name ">
+                            <h:outputText escape="false" style="white-space:pre-line;" value="#{user.firstname}"/>
+                        </p:column>
+
+                        <p:column style="width:15%" headerText="Last name ">
+                            <h:outputText escape="false" style="white-space:pre-line;" value="#{user.lastname}"/>
+                        </p:column>
+
+                        <p:column style="width:30%" headerText="Email ">
+                            <h:outputText escape="false" style="white-space:pre-line;" value="#{user.email}"/>
+                        </p:column>
+
+                        <p:column style="width:10%" headerText="Phone Number ">
+                            <h:outputText escape="false" style="white-space:pre-line;" value="#{user.phonenumber}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:form>
+    </h:body>
+</html>
+

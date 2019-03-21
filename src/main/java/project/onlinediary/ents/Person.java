@@ -6,14 +6,15 @@
 package project.onlinediary.ents;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -22,6 +23,12 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Person implements Serializable {
+
+
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "guests", cascade = CascadeType.ALL)
+    private List<Event> events;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -32,14 +39,10 @@ public class Person implements Serializable {
     private String password;
     private String firstname;
     private String lastname;
-//    
-//    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
-//    @JoinColumn(name = "id")
-//    private Address home;
-//  
-//    @OneToOne
-//    private Address home;
-  
+
+    @OneToOne
+    private Address home;
+    
     private String phonenumber;
     private String email;
 
@@ -89,6 +92,22 @@ public class Person implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Address getHome() {
+        return home;
+    }
+
+    public void setHome(Address home) {
+        this.home = home;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     

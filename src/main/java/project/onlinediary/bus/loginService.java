@@ -21,16 +21,17 @@ public class loginService {
     @EJB
     private PersonFacade pf;
     
-    public boolean validate(String user, String password) {
+    public Person validate(String user, String password) {
 		
         List<Person> p = pf.getPersonByUsernamePassword(user, pf.genHashPass(password));
 
         if (p.size() == 1) {
                 //result found, means valid inputs
-                return true;
+//                return true;
+                return p.get(0);
         }else{
 
-            return false;
+            return null;
         }
     }
 }

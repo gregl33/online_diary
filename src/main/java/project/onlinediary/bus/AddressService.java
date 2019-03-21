@@ -5,6 +5,7 @@
  */
 package project.onlinediary.bus;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import project.onlinediary.ents.Address;
@@ -23,14 +24,22 @@ public class AddressService {
     @EJB
     private AddressFacade af;
     
-            public Address createNewAddress(Address a) {//throws BusinessException {
-        //check things: duplicates
-//        if (pf.findPersonByUsername(p.getUsername()).isEmpty()) {
-            af.create(a);
+        public Address createNewAddress(Address a) { //throws BusinessException {
+            //check things: duplicates
+    //        if (pf.findPersonByUsername(p.getUsername()).isEmpty()) {
+            List<Address> existing_address = af.getAddressListByHosenameAndPostcode(a.getHouse_name(), a.getPostcode());
+            if(existing_address.isEmpty()){
+                af.create(a);
+                return a;
+            } else {
+    //            raise problem
+    //            throw new BusinessException("Duplicated name: " + p.getName());
+                return existing_address.get(0);
+            }
+        }
+        
+        public Address updateAddress(Address a) {
+            af.edit(a);
             return a;
-//        } else {
-            //raise problem
-//            throw new BusinessException("Duplicated name: " + p.getName());
-//        }
-    }
+        }
 }

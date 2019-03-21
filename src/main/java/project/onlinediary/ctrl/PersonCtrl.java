@@ -6,19 +6,23 @@
 package project.onlinediary.ctrl;
 
 import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import project.onlinediary.bus.AddressService;
 import project.onlinediary.bus.PersonService;
-import project.onlinediary.ents.Address;
 import project.onlinediary.ents.Person;
+
+
 
 /**
  *
  * @author greg
  */
-@Named(value = "personCtrl")
-@RequestScoped
+
+@ManagedBean(name = "personCtrl")
+@SessionScoped
 public class PersonCtrl {
 
     /**
@@ -31,19 +35,31 @@ public class PersonCtrl {
     @EJB
     private AddressService as;
     
-    public PersonCtrl() {
-    }
+    private Person currentUser = new Person();
     
-    private Person newUser = new Person();
-    private Address newAddress = new Address();
+    private boolean editMode;
 
-    public Person getNewUser() {
-        return newUser;
+    
+    public PersonCtrl() {
+        this.getUserDetails();
+    }
+        
+        
+    public void edit() {
+        System.out.println("EDIT MODE");
+        this.setEditMode(!this.editMode);
     }
 
-    public void setNewUser(Person newUser) {
-        this.newUser = newUser;
+    public boolean isEditMode() {
+        return editMode;
     }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+
+
+    
 
     public PersonService getPs() {
         return ps;
@@ -53,28 +69,48 @@ public class PersonCtrl {
         this.ps = ps;
     }
 
-    public Address getNewAddress() {
-        return newAddress;
+    
+    
+
+    public AddressService getAs() {
+        return as;
     }
 
-    public void setNewAddress(Address newAddress) {
-        this.newAddress = newAddress;
+    public void setAs(AddressService as) {
+        this.as = as;
+    }
+
+    public Person getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(Person currentUser) {
+        this.currentUser = currentUser;
     }
 
 
-    public String registerUser() {
-//        as.createNewAddress(newAddress);
-//        newUser.setHome(as.createNewAddress(newAddress));
-//        ps.createNewPerson(newUser);
 
-//        long tempid = 
+    public String updateUser() {
+        ps.updatePerson(currentUser);
+        as.updateAddress(currentUser.getHome());
+        edit();
+       return "profile?faces-redirect=true";
+    }
+    
+    public String getUserDetails() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+        if(session != null){
+            this.setCurrentUser((Person) session.getAttribute("user"));          
+        }
+        System.out.println("EVENTS Curren tUser: " + currentUser.getEvents().size());
+
         
-//        newAddress.setPersonid_(tempid);
-        newAddress.setResident(ps.createNewPerson(newUser));
-        as.createNewAddress(newAddress);
-        return "login";
+        return "profile?faces-redirect=true";
     }
     
     
+    
+
     
 }
