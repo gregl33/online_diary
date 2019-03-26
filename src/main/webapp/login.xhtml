@@ -34,10 +34,12 @@
 
 
                         <p:commandButton value="Sign In" update="loginGrid" ajax="true" action="#{loginCtrlMain.validateUser()}"/>
+                                <p:commandButton value="Register" immediate="true" action="#{loginCtrlMain.gotoregisterpage()}"/>
+
                     </h:panelGrid>
                 </h:form>
 
-        <p:commandButton value="Register" immediate="true" action="#{loginCtrlMain.gotoregisterpage()}"/>
+
 
     </h:body>
 </html>

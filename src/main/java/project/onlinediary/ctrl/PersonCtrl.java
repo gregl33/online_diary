@@ -5,6 +5,7 @@
  */
 package project.onlinediary.ctrl;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -20,7 +21,6 @@ import project.onlinediary.ents.Person;
  *
  * @author greg
  */
-
 @ManagedBean(name = "personCtrl")
 @SessionScoped
 public class PersonCtrl {
@@ -30,18 +30,31 @@ public class PersonCtrl {
      */
     
     @EJB
-    private PersonService ps;
+    private PersonService ps;// = new PersonService();
     
     @EJB
     private AddressService as;
     
     private Person currentUser = new Person();
     
+    
     private boolean editMode;
 
+        
+    @PostConstruct
+    public void init() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+        if(session != null){
+            this.setCurrentUser((Person) session.getAttribute("user"));          
+        }
+        ps.addpersontoent(currentUser);
+        
+    }
     
     public PersonCtrl() {
-        this.getUserDetails();
+//        getUserDetails();
+//        ps.addpersontoent(currentUser);
     }
         
         
@@ -103,7 +116,10 @@ public class PersonCtrl {
         if(session != null){
             this.setCurrentUser((Person) session.getAttribute("user"));          
         }
-        System.out.println("EVENTS Curren tUser: " + currentUser.getEvents().size());
+        System.out.println("EVENTS Curren User: " + currentUser.getEvents().size());
+//        currentUser.getEvents();
+//        ps.addpersontoent(currentUser);
+//                currentUser.getEvents();
 
         
         return "profile?faces-redirect=true";

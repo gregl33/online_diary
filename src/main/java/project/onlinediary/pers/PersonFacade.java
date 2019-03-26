@@ -8,9 +8,11 @@ package project.onlinediary.pers;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,7 +25,7 @@ import project.onlinediary.ents.Person;
  *
  * @author greg
  */
-@Stateless
+@Stateful
 public class PersonFacade extends AbstractFacade<Person> {
 
     @PersistenceContext(unitName = "onlineDiary_persistance")
@@ -52,6 +54,14 @@ public class PersonFacade extends AbstractFacade<Person> {
         q.setParameter("name", name2Search);
         q.setParameter("pass", pass2Search);
         List<Person> personsFound = q.getResultList();
+//        em.persist(this);
+
+//        if (!em.contains(personsFound.get(0))) {
+//          em.persist(personsFound.get(0));
+//        } else {
+//          em.merge(personsFound.get(0));
+//        }
+        
         return personsFound;
     }
     
@@ -87,5 +97,35 @@ public class PersonFacade extends AbstractFacade<Person> {
         String hex = DatatypeConverter.printHexBinary(hash);
         return hex;
     }
+    
+    public void addpersontoentity(Person p){
+        em.merge(p);
+//        em.persist(p);
+
+   
+    }
+    
+    
+    
+    
+//        public List<Person> findByGuest (Date startdate_, Date enddate_, List<Person> guestList_) {
+//        Query q = em.createQuery("SELECT p FROM Person p WHERE p in :guestList "
+//                + "AND (:startdate BETWEEN p.events.start_datetime AND p.events.end_datetime"
+//                + "OR :enddate BETWEEN  p.events.start_datetime AND p.events.end_datetime)"
+//        );
+//                
+//                
+////                "SELECT e FROM Event e "
+////                + "WHERE e.guests IN :guestList "
+////                + "AND :startdate BETWEEN  e.start_datetime AND e.end_datetime "
+////                + "OR :enddate BETWEEN  e.start_datetime AND e.end_datetime" );
+//       
+//        q.setParameter("startdate", startdate_);
+//        q.setParameter("enddate", enddate_);
+//        q.setParameter("guestList", guestList_);
+//
+//        List<Person> evetnsFound = q.getResultList();
+//        return evetnsFound;
+//    }
            
 }

@@ -6,6 +6,9 @@
 package project.onlinediary.ents;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -25,10 +28,12 @@ import javax.persistence.OneToOne;
 public class Person implements Serializable {
 
 
-    
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "guests", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "guests",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Event> events;
+    
+    @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Event> events_o;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -102,15 +107,35 @@ public class Person implements Serializable {
         this.home = home;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
+//    public List<Event> getEvents() {
+//        return events;
+//    }
 
     public void setEvents(List<Event> events) {
         this.events = events;
     }
 
+    public List<Event> getEvents_o() {
+        return events_o;
+    }
+
+    public void setEvents_o(List<Event> events_o) {
+        this.events_o = events_o;
+    }
     
+//    @Transient
+    public List<Event> getEvents() {
+        List<Event> newList = new ArrayList<Event>(events);
+        newList.addAll(events_o);
+        Collections.sort(newList, new Comparator<Event>() {
+            @Override
+            public int compare(Event ev1, Event ev2) {
+                return ev1.getStart_datetime().compareTo(ev2.getStart_datetime());
+                   
+            }
+        });
+        return newList;
+    }
     
 
     public Long getId() {

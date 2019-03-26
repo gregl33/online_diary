@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import org.eclipse.persistence.annotations.JoinFetch;
 
 /**
  *
@@ -35,7 +36,10 @@ public class Event implements Serializable {
     private Date start_datetime;
     private Date end_datetime;
 
+
+//    @ManyToOne
     @ManyToOne
+    @JoinFetch
     private Person owner;
     
     
@@ -43,7 +47,7 @@ public class Event implements Serializable {
     private List<Person> guests;// = new ArrayList();
 
     public Event() {
-        this.guests = new ArrayList<Person>();
+        this.guests = new ArrayList<>();
     }
 
     

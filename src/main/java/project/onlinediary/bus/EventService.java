@@ -33,5 +33,4 @@ public class EventService {
         return ef.findByGuest(e.getStart_datetime(),e.getEnd_datetime(),e.getGuests());
     }
  
- 
 }

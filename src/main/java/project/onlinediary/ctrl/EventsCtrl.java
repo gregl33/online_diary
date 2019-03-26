@@ -15,11 +15,14 @@ import project.onlinediary.ents.Event;
 import project.onlinediary.ents.Person;
 import javax.ejb.EJB;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author greg
  */
+//@Named(value = "eventsCtrl")
 @ManagedBean(name = "eventsCtrl")
 @ViewScoped
 public class EventsCtrl implements Serializable {
@@ -28,6 +31,7 @@ public class EventsCtrl implements Serializable {
     private EventService es;
     
     @ManagedProperty(value="#{personCtrl}") 
+//    @Inject
     private PersonCtrl personCtrlBean;
       
       
@@ -89,7 +93,13 @@ public class EventsCtrl implements Serializable {
         return "events?faces-redirect=true";
     }
     
-    public String goUpcomingEvents(){    
+    public String goUpcomingEvents(){  
+//        Person tt = personCtrlBean.getCurrentUser();
+//        personCtrlBean.getPs().addpersontoent(tt);
+//        personCtrlBean.getCurrentUser().getEvents();
+        System.out.print("EVENTS: " + personCtrlBean.getCurrentUser().getEvents().size());
+//        System.out.print("EVENTS O: " + personCtrlBean.getCurrentUser().getEvents_o().size());
+
         return "upcoming?faces-redirect=true";
     }
    
@@ -111,11 +121,18 @@ public class EventsCtrl implements Serializable {
         newEvent_.setOwner(personCtrlBean.getCurrentUser());
         
         List<Event> guestsEvents = es.checkGuestAvailability(newEvent_);
+//        List<Person> pp = personCtrlBean.getPs().checkGuestAvailability(newEvent_);
+        
         System.out.print("EVENTS: " + guestsEvents.size());
         if(guestsEvents.isEmpty()){
             es.createEvent(newEvent_);
             personCtrlBean.getCurrentUser().getEvents().add(newEvent_);
             return "upcoming?faces-redirect=true";
+        }else{
+//            System.out.print("pp: " + pp.size());
+
+            System.out.print("USER BUSY");
+            
         }
         
        return "";

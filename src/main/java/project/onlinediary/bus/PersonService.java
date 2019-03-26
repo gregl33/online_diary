@@ -7,7 +7,8 @@ package project.onlinediary.bus;
 
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.ejb.*;
+import project.onlinediary.ents.Event;
 import project.onlinediary.ents.Person;
 import project.onlinediary.pers.PersonFacade;
 
@@ -17,7 +18,7 @@ import project.onlinediary.pers.PersonFacade;
  *
  * @author greg
  */
-@Stateless
+@Stateful
 public class PersonService {
 
     // Add business logic below. (Right-click in editor and choose
@@ -65,6 +66,13 @@ public class PersonService {
         return pf.findByAll(searchfor,userid);
     }
         
-        
+    public void addpersontoent(Person p) {
+        pf.addpersontoentity(p);
+    } 
+    
+//    public List<Person> checkGuestAvailability(Event e){
+//  
+//        return pf.findByGuest(e.getStart_datetime(),e.getEnd_datetime(),e.getGuests());
+//    }
     
 }

@@ -28,6 +28,7 @@ public class loginService {
         if (p.size() == 1) {
                 //result found, means valid inputs
 //                return true;
+                p.get(0).getEvents();
                 return p.get(0);
         }else{
 
