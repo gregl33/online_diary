@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>home</title>
+        
+        
+        
+        <style>
+            
+            .fc-toolbar.fc-header-toolbar{
+                    margin: 0;
+    padding: 0;
+    height: 0;
+            }
+        </style>
+       
+        
+    </h:head>
+    <h:body>    
+         
+        <h:panelGroup class="mainHome mainLogin ">
+
+            <ui:include src="../templates/navbar.xhtml"></ui:include>
+
+        
+        
+        <h:panelGroup class="calendarHome">
+              
+                <h:panelGroup class="groupedItemsHome">
+    
+                    <span class="todaysEventsTxt">#{eventsCtrl.getDayOfWeek(eventsCtrl.todayDate.day)}, 
+                               #{eventsCtrl.todayDate.date} #{eventsCtrl.getMonth(eventsCtrl.todayDate.month)}</span>
+
+                </h:panelGroup>
+        
+     
+        <h:panelGroup id="scheduleEvents" class="homeDaySchedule">
+        <span class="calendartxt">Calendar</span>
+
+        <h:panelGroup rendered="#{eventsCtrl.timeTillnextEventToday() != '' }" class="todaysEventsmsg">The first event on today is "#{eventsCtrl.nextEventToday()}" in #{eventsCtrl.timeTillnextEventToday()}</h:panelGroup>
+                                       
+        <p:schedule id="schedule" value="#{personCtrl.eventModel}" showHeader="false" 
+                    widgetVar="myschedule"  aspectRatio="2" timeZone="GMT-1"
+                         view="agendaDay" draggable="false" leftHeaderTemplate="none" 
+                         centerHeaderTemplate="none" rightHeaderTemplate="none"
+                         resizable="false" scrollTime="#{personCtrl.getCurrTime()}"
+                         ignoreTimezone="false"
+                         allDaySlot="" timeFormat="HH:mm" axisFormat="HH:mm">
+                 <p:ajax event="dateSelect" listener="#{eventsCtrl.onDateSelect}" update="mainEventForm"
+                    oncomplete="PF('eventDialog').show();" />
+                <p:ajax event="eventSelect" listener="#{eventsCtrl.onEventSelect}" 
+                    update="mainEventForm" oncomplete="PF('eventDialog').show();" />
+            
+            </p:schedule>
+       
+            
+            
+        <p:dialog id="allEventsDialog" position="center center"
+                      widgetVar="eventDialog" header="Event Details" >
+           
+                <p:ajax event="close" update="allEventsDialog" listener="#{eventsCtrl.handleClose}" />
+                <ui:include src="../templates/eventForm.xhtml">
+                    <ui:param name="event" value="#{eventsCtrl.newEvent_}" /> 
+                    <ui:param name="todaydate" value="#{eventsCtrl.todayDate}" /> 
+                    <ui:param name="bean" value="#{eventsCtrl}" /> 
+                    <ui:param name="redirectVal" value="home" /> 
+
+                </ui:include>
+            
+            </p:dialog>
+       </h:panelGroup>
+        </h:panelGroup>
+        </h:panelGroup>
+    </h:body>
+</html>
+
+<!--            -->

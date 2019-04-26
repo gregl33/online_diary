@@ -3,13 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Contacts</title>
     </h:head>
-    <h:body>
+    <h:body onload="#{searchCtrl.getAllPersons()}">
 
-        <ui:include src="templates/navbar.xhtml"></ui:include>
+    <h:panelGroup class="mainContacts mainLogin ">
+
+                
+        <ui:include src="../templates/navbar.xhtml"></ui:include>
         <h:form id="searchFrom">
 
             <h:panelGroup class="contactCon">
@@ -23,29 +27,45 @@
 
                 <h:panelGroup class="contactTableCon">
                     <p:dataTable id="contactTable" value="#{searchCtrl.contactUsers}" var="user" paginator="true" rows="10" styleClass="paginated" paginatorAlwaysVisible="false" paginatorPosition="bottom">
-                        <p:column style="width:20%" headerText="Username ">
+                        <p:column  headerText="Username ">
                             <h:outputText escape="false" style="white-space:pre-line;" value="#{user.username}"/>
                         </p:column>
 
-                        <p:column style="width:15%" headerText="First name ">
+                        <p:column  headerText="First name ">
                             <h:outputText escape="false" style="white-space:pre-line;" value="#{user.firstname}"/>
                         </p:column>
 
-                        <p:column style="width:15%" headerText="Last name ">
+                        <p:column  headerText="Last name ">
                             <h:outputText escape="false" style="white-space:pre-line;" value="#{user.lastname}"/>
                         </p:column>
 
-                        <p:column style="width:30%" headerText="Email ">
+                        <p:column  headerText="Email ">
                             <h:outputText escape="false" style="white-space:pre-line;" value="#{user.email}"/>
                         </p:column>
 
-                        <p:column style="width:10%" headerText="Phone Number ">
+                        <p:column  headerText="Phone Number ">
                             <h:outputText escape="false" style="white-space:pre-line;" value="#{user.phonenumber}"/>
+                        </p:column>
+                        <p:column style="width:24px">
+                            <p:commandLink update=":searchFrom:matchGrid_" oncomplete="PF('documentDialog').show()" title="View Detail" styleClass="ui-icon pi pi-search">
+                                <f:setPropertyActionListener value="#{user}" target="#{searchCtrl.selectedDocument}" />
+                            </p:commandLink>
                         </p:column>
                     </p:dataTable>
                 </h:panelGroup>
             </h:panelGroup>
+            
+            <p:dialog id="dialog" showEffect="fade" widgetVar="documentDialog" modal="true" resizable="false">
+                <h:panelGrid id="matchGrid_">
+                    <ui:include src="../templates/personForm.xhtml">
+                        <ui:param name="bean" value="#{personCtrl}" /> 
+                        <ui:param name="person" value="#{searchCtrl.selectedPerson}" /> 
+                        <ui:param name="address_" value="#{searchCtrl.selectedPerson.home}" /> 
+                    </ui:include>
+                </h:panelGrid>
+            </p:dialog>
         </h:form>
+    </h:panelGroup>
     </h:body>
 </html>
 

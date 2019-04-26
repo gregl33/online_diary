@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Profile</title>
+        <style type="text/css">
+            .ui-toggleswitch {
+                vertical-align: bottom;
+            }
+            .ui-outputlabel-rfi { display: none; }
+
+        </style>
+    </h:head>
+    <h:body>
+        <h:panelGroup class="mainProfile mainLogin">
+
+        <ui:include src="../templates/navbar.xhtml"></ui:include>
+        
+        <h:panelGroup class="profilePopUp">
+
+            <h:panelGroup class="picGroup">
+                <span class="innerCircle">
+                    <span class="userIconLarge">
+                        <i class="fa fa-fw fa-user"></i>
+                    </span>
+                </span>
+            </h:panelGroup>
+            
+
+                        
+        <h:panelGroup class="profileFormCon">
+   
+        <h:form id="editForm" >
+            
+            <h:panelGroup class="editGroup">
+                
+                
+                <p:commandButton value="Edit" immediate="true" 
+                                 action="#{personCtrl.edit()}" update="editForm"
+                                 icon="fa fa-fw fa-edit" ajax="true"
+                                 rendered="#{!personCtrl.editMode}"/>
+                <p:commandButton  update="editForm" value="Update" ajax="true" 
+                                  action="#{personCtrl.updateUser()}" icon="fa fa-fw fa-save"
+                                  rendered="#{personCtrl.editMode}"/>
+            </h:panelGroup>
+            
+            <h:panelGrid id="matchGrid_">
+                <ui:include src="../templates/personForm.xhtml">
+                    <ui:param name="bean" value="#{personCtrl}" /> 
+                    <ui:param name="person" value="#{personCtrl.currentUser}" /> 
+                    <ui:param name="address_" value="#{personCtrl.currentUser.home}" /> 
+                </ui:include>
+            </h:panelGrid>
+            
+
+        </h:form>
+
+            </h:panelGroup>
+    </h:panelGroup>
+</h:panelGroup>
+
+    </h:body>
+</html>
+

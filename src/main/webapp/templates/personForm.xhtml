@@ -4,118 +4,211 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-                    
-    <h:panelGrid columns="1">
-        <p:outputLabel for="firstname" value="First Name:" ></p:outputLabel>
-        <h:panelGroup>
-            <p:inputText id="firstname"              
-            requiredMessage="Please enter your First Name"
+
+    
+<h:panelGroup class="personFormGroup">
+    <span class="personFromGroupTitle">Personal Details</span>
+        <h:panelGroup class="lineInputCon lineOneInputCon">
+            <p:inputText id="firstname" class="lineOneInput"             
+            requiredMessage="Please enter your First Name" placeholder="First Name"
             required="true" value="#{person.firstname}" rendered="#{bean.editMode}"></p:inputText>
-            <p:message for="firstname" />
-            <h:outputText value="#{person.firstname}" rendered="#{not bean.editMode}" />
+            <p:message class="errorMsg" for="firstname" />
+           
+           <h:panelGroup class="readModeGroup" rendered="#{not bean.editMode}" >
+                <h:outputText class="readModeLabel" value="First Name:" />
+                <h:outputText class="readModeInput" value="#{person.firstname}" />
+           </h:panelGroup>
         </h:panelGroup>
      
-        <p:outputLabel for="lastname" value="Last Name:" ></p:outputLabel>
-        <h:panelGroup>
-            <p:inputText id="lastname"  required="true"
-            requiredMessage="Please enter your Last Name"
+        <h:panelGroup class="lineInputCon lineOneInputCon">
+            <p:inputText id="lastname"  required="true" class="lineOneInput"
+                         requiredMessage="Please enter your Last Name" placeholder="Last Name"
             value="#{person.lastname}" rendered="#{bean.editMode}"
             ></p:inputText>
-            <p:message for="lastname" rendered="#{bean.editMode}"/>
-            <h:outputText value="#{person.lastname}" rendered="#{not bean.editMode}" />
+            <p:message class="errorMsg" for="lastname" rendered="#{bean.editMode}"/>
+                       
+            <h:panelGroup class="readModeGroup" rendered="#{not bean.editMode}" >
+                <h:outputText class="readModeLabel" value="Last Name:" />
+                <h:outputText class="readModeInput" value="#{person.lastname}" />
+           </h:panelGroup>
+            
+            
         </h:panelGroup>
         
-        <p:outputLabel for="phone" value="Phone:" ></p:outputLabel>
-        <h:panelGroup>
-            <p:inputMask id="phone"  mask="(999) 99999999" 
+        <h:panelGroup class="lineInputCon lineOneInputCon">
+            <p:inputText id="phone"  class="lineOneInput"
             requiredMessage="Please enter your phone number"
-            value="#{person.phonenumber}" rendered="#{bean.editMode}"
-            required="true">
-            </p:inputMask>
-            <p:message for="phone" rendered="#{bean.editMode}"/>
-            <h:outputText value="#{person.phonenumber}" rendered="#{not bean.editMode}" />
+            value="#{person.phonenumber}" rendered="#{bean.editMode}" placeholder="Phone Number"
+            required="true" validatorMessage="Invalid phone number format">
+                  <f:validateRegex for="phone" 
+                  pattern="^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$" ></f:validateRegex>
+            </p:inputText>
+            <p:message class="errorMsg" for="phone" rendered="#{bean.editMode}"/>
+
+            
+            <h:panelGroup class="readModeGroup" rendered="#{not bean.editMode}" >
+                <h:outputText class="readModeLabel" value="Phone Number:" />
+                <h:outputText class="readModeInput" value="#{person.phonenumber}" />
+           </h:panelGroup>
         </h:panelGroup>
         
-        <p:outputLabel for="email" value="Email:" ></p:outputLabel>
-        <h:panelGroup>
-            <p:inputText id="email" required="true" 
+        <h:panelGroup class="lineInputCon lineOneInputCon">
+            <p:inputText id="email" required="true"   class="lineOneInput"
             requiredMessage="Please enter your email address."
-            validatorMessage="Invalid email format" rendered="#{bean.editMode}"
+            validatorMessage="Invalid email format" rendered="#{bean.editMode}" placeholder="Email"
             value="#{person.email}">
                 <f:validateRegex for="email"
                   pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" ></f:validateRegex>
             </p:inputText>
-            <p:message for="email" rendered="#{bean.editMode}"/>
-            <h:outputText value="#{person.email}" rendered="#{not bean.editMode}" />
+            <p:message class="errorMsg" for="email" rendered="#{bean.editMode}"/>
+           
+         
+            <h:panelGroup class="readModeGroup" rendered="#{not bean.editMode}" >
+                <h:outputText class="readModeLabel" value="Email:" />
+                <h:outputText class="readModeInput" value="#{person.email}" />
+           </h:panelGroup>
+            
+        </h:panelGroup>
+</h:panelGroup>
 
-        </h:panelGroup>
-        
-        <p:outputLabel for="house_name" value="House Name:" ></p:outputLabel>
-        <h:panelGroup>
-            <p:inputText id="house_name" required="true"           
-            requiredMessage="Please enter your House Name" rendered="#{bean.editMode}"
+<h:panelGroup class="personFormGroup">
+    <span class="personFromGroupTitle">Address Details</span>
+
+        <h:panelGroup class="lineInputCon lineThreeInputCon_1">
+            <p:inputText id="house_name" required="true" class="lineOneInput"          
+            requiredMessage="Please enter your House Name" rendered="#{bean.editMode}" placeholder="House Name"
             value="#{address_.house_name}">
+                
             </p:inputText>
-            <p:message for="house_name" rendered="#{bean.editMode}"/>
-            <h:outputText value="#{address_.house_name}" rendered="#{not bean.editMode}" />
+            <p:message class="errorMsg" for="house_name" rendered="#{bean.editMode}"/>
+            
+            <h:panelGroup class="readModeGroup" rendered="#{not bean.editMode}" >
+                <h:outputText class="readModeLabel" value="House Name:" />
+                <h:outputText class="readModeInput" value="#{address_.house_name}" />
+           </h:panelGroup>
         </h:panelGroup>
         
-        <p:outputLabel for="address_line_1" value="Address Line 1:" ></p:outputLabel>
-        <h:panelGroup>
-            <p:inputText id="address_line_1" required="true"           
+        <h:panelGroup class="lineInputCon lineThreeInputCon_2">
+            <p:inputText id="address_line_1" required="true"   class="lineOneInput"  placeholder="Address Line 1"      
             requiredMessage="Please enter your Address Line 1" rendered="#{bean.editMode}"
             value="#{address_.address_line_1}">
             </p:inputText>
-            <p:message for="address_line_1" rendered="#{bean.editMode}"/>
-            <h:outputText value="#{address_.address_line_1}" rendered="#{not bean.editMode}" />
+            <p:message class="errorMsg" for="address_line_1" rendered="#{bean.editMode}"/>
+            
+            <h:panelGroup class="readModeGroup" rendered="#{not bean.editMode}" >
+                <h:outputText class="readModeLabel" value="Address Line 1:" />
+                <h:outputText class="readModeInput" value="#{address_.address_line_1}" />
+           </h:panelGroup>
         </h:panelGroup>
         
-        <p:outputLabel for="address_line_2" value="Address Line 2:" ></p:outputLabel>
-        <h:panelGroup>
-            <p:inputText id="address_line_2" value="#{address_.address_line_2}" rendered="#{bean.editMode}">
+        <h:panelGroup class="lineInputCon lineThreeInputCon_3">
+            <p:inputText id="address_line_2" value="#{address_.address_line_2}" 
+                         class="lineOneInput" placeholder="Address Line 2"
+                         rendered="#{bean.editMode}">
             </p:inputText>
-            <h:outputText value="#{address_.address_line_2}" rendered="#{not bean.editMode}" />
+            
+                        
+            <h:panelGroup class="readModeGroup" rendered="#{not bean.editMode}" >
+                <h:outputText class="readModeLabel" value="Address line 2:" />
+                <h:outputText class="readModeInput" value="#{address_.address_line_2}" />
+           </h:panelGroup>
         </h:panelGroup>
               
-        <p:outputLabel for="town" value="Town:" ></p:outputLabel>
-        <h:panelGroup>
-            <p:inputText id="town" required="true"           
+        <h:panelGroup class="lineInputCon lineFiveInputCon">
+            <p:inputText id="town" required="true"  class="lineOneInput" placeholder="Town"            
             requiredMessage="Please enter your Town" rendered="#{bean.editMode}"
             value="#{address_.town}">
             </p:inputText>
-            <p:message for="town" rendered="#{bean.editMode}"/>
-            <h:outputText value="#{address_.town}" rendered="#{not bean.editMode}" />
+            <p:message class="errorMsg" for="town" rendered="#{bean.editMode}"/>
+            
+            
+            <h:panelGroup class="readModeGroup" rendered="#{not bean.editMode}" >
+                <h:outputText class="readModeLabel" value="Town" />
+                <h:outputText class="readModeInput" value="#{address_.town}" />
+           </h:panelGroup>
         </h:panelGroup>
                         
-        <p:outputLabel for="county" value="County" ></p:outputLabel>
-        <h:panelGroup>
-            <p:inputText id="county" required="true"           
+        <h:panelGroup class="lineInputCon lineFiveInputCon">
+            <p:inputText id="county" required="true"  class="lineOneInput" placeholder="County"            
             requiredMessage="Please enter your County" rendered="#{bean.editMode}"
             value="#{address_.county}">
             </p:inputText>
-            <p:message for="county" rendered="#{bean.editMode}"/>
-            <h:outputText value="#{address_.county}" rendered="#{not bean.editMode}" />
+            <p:message class="errorMsg" for="county" rendered="#{bean.editMode}"/>
+            
+                       
+            <h:panelGroup class="readModeGroup" rendered="#{not bean.editMode}" >
+                <h:outputText class="readModeLabel" value="County:" />
+                <h:outputText class="readModeInput" value="#{address_.county}" />
+           </h:panelGroup>
+            
         </h:panelGroup>
-                                
-        <p:outputLabel for="postcode" value="Postcode" ></p:outputLabel>
-        <h:panelGroup>
-            <p:inputText id="postcode" required="true"           
+        <h:panelGroup class="lineInputCon lineFiveInputCon">
+            <p:inputText id="postcode" required="true" class="lineOneInput" placeholder="Postcode"         
             requiredMessage="Please enter your Postcode" rendered="#{bean.editMode}"
+            validatorMessage="Invalid Post Code format"
             value="#{address_.postcode}">
+                 <f:validateRegex for="postcode"
+                  pattern="([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$" ></f:validateRegex>
+                
             </p:inputText>
-            <p:message for="postcode" rendered="#{bean.editMode}"/>
-            <h:outputText value="#{address_.postcode}" rendered="#{not bean.editMode}" />
+            <p:message class="errorMsg" for="postcode" rendered="#{bean.editMode}"/>
+            
+                       
+            <h:panelGroup class="readModeGroup" rendered="#{not bean.editMode}" >
+                <h:outputText class="readModeLabel" value="Post Code:" />
+                <h:outputText class="readModeInput" value="#{address_.postcode}" />
+           </h:panelGroup>
         </h:panelGroup>
         
-        <p:outputLabel for="username" value="Username:" ></p:outputLabel>
-        <h:panelGroup>
-            <p:inputText id="username" required="true"           
+ </h:panelGroup>
+  
+        
+        
+        
+        
+    <h:panelGroup class="personFormGroup">
+        <span class="personFromGroupTitle">Account Details</span>
+
+        <h:panelGroup class="lineInputCon lineFiveInputCon" id="userTakenCon">
+            <p:inputText id="username" required="true"  class="lineOneInput" placeholder="Username"         
             requiredMessage="Please enter your Username:" rendered="#{bean.editMode}"
+            validatorMessage=""
             value="#{person.username}">
+                 <p:ajax event="keyup"
+                         process="@this" update="userTakenCon"></p:ajax>
             </p:inputText>
-            <p:message for="username" rendered="#{bean.editMode}"/>
-            <h:outputText value="#{person.username}" rendered="#{not bean.editMode}" />
+            
+            <h:panelGroup  class="userTakenCon" rendered="#{bean.editMode}">
+                <h:panelGroup rendered="#{bean.checkUsernameFree()}" class="usertakenIcons userFree"> <i class="fa fa-fw fa-check"></i> </h:panelGroup>
+                <h:panelGroup rendered="#{!bean.checkUsernameFree()}" class="usertakenIcons usertaken">  <i class="fa fa-fw fa-times"></i>  </h:panelGroup>
+            </h:panelGroup>
+            
+            <p:message class="errorMsg" for="username" id="usernameError" rendered="#{bean.editMode}"/>
+                        
+            <h:panelGroup class="readModeGroup" rendered="#{not bean.editMode}" >
+                <h:outputText class="readModeLabel" value="Username:" />
+                <h:outputText class="readModeInput" value="#{person.username}" />
+           </h:panelGroup>
         </h:panelGroup>
-    </h:panelGrid>
+
+        <h:panelGroup class="lineInputCon lineFiveInputCon" rendered="#{renderePass}">
+                    <p:password id="pwd1"  match="con_pwd1" class="lineOneInput" placeholder="Password" 
+                    requiredMessage="Please enter your Password"
+                    label="Password 1" required="true" 
+                    validatorMessage="Passwords needs to match"
+                    value="#{person.password}"
+                    ></p:password>
+                    <p:message class="errorMsg" for="pwd1" />
+                 </h:panelGroup>
+
+        <h:panelGroup class="lineInputCon lineFiveInputCon" rendered="#{renderePass}">
+                    <p:password id="con_pwd1" class="lineOneInput" placeholder="Verify password" 
+                    requiredMessage="Please Verify your Password"
+                    label="con_password" required="true" ></p:password>
+                    <p:message class="errorMsg" for="con_pwd1" />
+                </h:panelGroup>
+                
+        </h:panelGroup>
+
 </html>
 

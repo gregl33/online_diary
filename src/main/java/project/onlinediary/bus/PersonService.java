@@ -8,7 +8,6 @@ package project.onlinediary.bus;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.*;
-import project.onlinediary.ents.Event;
 import project.onlinediary.ents.Person;
 import project.onlinediary.pers.PersonFacade;
 
@@ -21,9 +20,7 @@ import project.onlinediary.pers.PersonFacade;
 @Stateful
 public class PersonService {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-    
+ 
     
     @EJB
     private PersonFacade pf;
@@ -55,6 +52,7 @@ public class PersonService {
         
     public Person updatePerson(Person p) {
         pf.edit(p);
+        
         return p;
     }
     
@@ -70,9 +68,10 @@ public class PersonService {
         pf.addpersontoentity(p);
     } 
     
-//    public List<Person> checkGuestAvailability(Event e){
-//  
-//        return pf.findByGuest(e.getStart_datetime(),e.getEnd_datetime(),e.getGuests());
-//    }
+    public boolean checkUsername(String u) {
+        List<Person> temp = pf.findPersonByUsername(u);
+        return temp.isEmpty();
+    }
+
     
 }

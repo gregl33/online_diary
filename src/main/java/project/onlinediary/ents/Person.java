@@ -40,7 +40,7 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String username;
+    private String username = "";
     private String password;
     private String firstname;
     private String lastname;
@@ -123,7 +123,6 @@ public class Person implements Serializable {
         this.events_o = events_o;
     }
     
-//    @Transient
     public List<Event> getEvents() {
         List<Event> newList = new ArrayList<Event>(events);
         newList.addAll(events_o);
@@ -137,6 +136,10 @@ public class Person implements Serializable {
         return newList;
     }
     
+    public List<Event> getEventsG() {
+        return events;
+    }
+    
 
     public Long getId() {
         return id;
@@ -146,6 +149,10 @@ public class Person implements Serializable {
         this.id = id;
     }
 
+    
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -33,13 +33,13 @@ public class EventFacade extends AbstractFacade<Event> {
         super(Event.class);
     }
     
-    
+
     
        public List<Event> findByGuest (Date startdate_, Date enddate_, List<Person> guestList_) {
         Query q = em.createQuery("SELECT e FROM Event e "
                 + "WHERE e.guests IN :guestList "
-                + "AND :startdate BETWEEN  e.start_datetime AND e.end_datetime "
-                + "OR :enddate BETWEEN  e.start_datetime AND e.end_datetime" );
+                + "AND (:startdate BETWEEN e.start_datetime AND e.end_datetime) "
+                + "OR (:enddate BETWEEN e.start_datetime AND e.end_datetime)" );
        
         q.setParameter("startdate", startdate_);
         q.setParameter("enddate", enddate_);

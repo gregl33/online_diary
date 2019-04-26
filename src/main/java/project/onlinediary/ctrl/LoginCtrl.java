@@ -101,13 +101,16 @@ public class LoginCtrl {
 //        long tempid = 
 
 //        
-        newUser.setHome(as.createNewAddress(newAddress));
-        ps.createNewPerson(newUser);
-//        newAddress.setPersonid_(tempid);
-//        newAddress.setResident(ps.createNewPerson(newUser));
-//        as.createNewAddress(newAddress);
-        
-        return "login?faces-redirect=true";
+        if(checkUsernameFree()){
+                newUser.setHome(as.createNewAddress(newAddress));
+                ps.createNewPerson(newUser);
+        //        newAddress.setPersonid_(tempid);
+        //        newAddress.setResident(ps.createNewPerson(newUser));
+        //        as.createNewAddress(newAddress);
+
+                return "login?faces-redirect=true";
+        }
+        return "";
     }
         
     	//validate login
@@ -127,7 +130,7 @@ public class LoginCtrl {
                     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
                     session.setAttribute("user", userLoggedin);	
                     
-                    return "home?faces-redirect=true";
+                    return "app/home?faces-redirect=true";
 		} else {
 //			FacesContext.getCurrentInstance().addMessage(
 //					null,
@@ -146,17 +149,43 @@ public class LoginCtrl {
         public String loggout(){
             
             FacesContext facesContext = FacesContext.getCurrentInstance();
-//            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
-//            if(session != null){
-//                session.removeAttribute("user");
-//            }
+            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+            if(session != null){
+                session.removeAttribute("user");
+                session.invalidate();
+            }
             facesContext.getExternalContext().invalidateSession();
-                
-            return "login?faces-redirect=true";
+        
+            
+            return "/faces/login?faces-redirect=true";
         }
         
         public String gotoregisterpage(){
 //            this.edit();
             return "register?faces-redirect=true";
     }
+        
+    public String gotologinPage(){
+            return "login?faces-redirect=true";
+    }
+    
+    public boolean checkUsernameFree(){
+        if(!ps.checkUsername(newUser.getUsername())){
+            FacesContext.getCurrentInstance().
+                    addMessage("registerForm:username",
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                                    "Error!", "'" + newUser.getUsername() + "' Username already exists!"));              
+        }
+        if(newUser.getUsername().length() >= 1){
+            return ps.checkUsername(newUser.getUsername());
+        }else{
+            return false;
+        }
+            
+        
+            
+//        return ps.checkUsername(newUser.getUsername());
+    }
+    
+
 }

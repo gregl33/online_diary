@@ -1,4 +1,158 @@
+
+
+
+body{
+margin: 0 !important;  
+padding: 0 !important;    
+font-family: 'Overpass', sans-serif;
+
+}
+
+
+/*********************************LOGIN_IN**************************************/
+.logintitle{
+    width: 100%;
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.mainLogin{
+    display: inline-block;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url(/onlineDiary/faces/javax.faces.resource/images/mainBack.jpg); /*url("/onlineDiary/faces/javax.faces.resource/images/mainBack.jpg")*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.mainLoginCon{
+    display: inline-block;
+    height: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 40px;
+    width: 400px;
+    background: #f3f3f3;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+.loginFormBtncon{
+    width: 100%;
+    display: inline-block;
+    padding: 10px 5px;
+}
+
+
+
+.loginFormBtns{
+    width: 100%;
+    padding: 5px;
+}
+
+
+.loginInput{
+    display: inline-block;
+    width: 100%;
+    padding: 5px 0;
+}
+.loginFormCon{
+    display: inline-block;
+    width: 100%;
+}
+
+
+.usernameInput,.passwordInput{
+    width: 100%;
+    padding: 10px !important;
+}
+
+.errorMsg{
+    padding: 0 !important;
+    width: 100%;
+    float: left;
+    text-align: left;
+}
+.errorMsg.ui-message.ui-message-error{
+    padding: 5px !important;
+    border-radius: 0 0 5px 5px;
+}
+
+.orLabel{
+    position: relative;
+    display: inline-block;
+    /* background: red; */
+    width: 100%;
+    text-align: center;
+}
+.orLabel:after{
+    content: "";
+    width: 100%;
+    background-color: transparent;
+    display: block;
+    height: 1px;
+    border-top: 1px solid #b7b7b7;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+}
+.orText{
+    position: relative;
+    display: inline-block;
+    /* background: red; */
+    /* width: 100%; */
+    z-index: 2;
+    background: #f3f3f3;
+    font-size: 16px;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+/******************************************************************************/
+
+
+
 /*********************************nav_bar**************************************/
+
+.navCon ul{
+    padding: 10px;
+    /* font-size: 16px !important; */
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    overflow: hidden;
+    color: white;
+    background: rgba(0, 0, 0, 0.15);
+}
+.navCon span{
+    color: white !important;
+}
+.navCon .ui-menu{
+    background-color: transparent !important; 
+    border: none !important;
+}
+.navCon{
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+}
+.welcomeUserTxt{
+    padding: 5px;
+    margin-right: 5px;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 14px;
+}
+.navCon .ui-state-hover{
+        background: rgba(255, 255, 255, 0.3) !important;
+        border-radius: 5px !important;
+
+        
+}
 /******************************************************************************/
 
 
@@ -12,36 +166,316 @@
 /*********************************contact**************************************/
 .contactCon{
     display: block;
-    width: 100%;
+    width: 98%;
     padding: 20px;
     box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.15);
+    margin-left: 1%;
+    border-radius: 5px;
 }
 
 .searchContactCon{
     display: inline-block;
     float: right;
     padding: 10px;
+    width: 40%;
 }
 .contactTableCon{
     display: inline-block;
     /* background: red; */
     padding: 10px;
 }
+.searchContactCon input{
+    width: 100%;
+}
 /******************************************************************************/
 
 
 
 /**********************************home****************************************/
+.homeDaySchedule {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    padding: 5px;
+    background: rgba(236, 236, 236, 0.9);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    margin-top: 10px;
+    /* margin-left: 10px; */
+}
+
+#schedule{
+    position: relative;
+    display: inline-block;
+    float: left;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 2px solid #cccccc;
+}
+
+#schedule thead{
+    display: none;
+}
+
+#eventDialogID{
+    height: auto;
+    position: initial !important;
+    float: left !important;
+    display: none;
+    width: 50% !important;
+
+}
+
+.eventDetails_title{
+    font-size: 15px !important;
+    font-weight: bold;
+}
+
+.eventDetails_guests{
+    width: 100%;
+    display: block;
+    padding-left: 10px; 
+}
+.dialEventDesc{
+    font-style: italic;
+    color: grey;
+        font-size: 12px !important;
+}
+
+.todaysEventsmsg {
+    width: 100%;
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+.todaysEventsTxt{
+    width: 100%;
+    display: inline-block;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px;
+    color: white;
+}
+
+.calendarHome{
+    display: inline-block;
+    width: 50%;
+    margin: 10px;
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%,-50%);
+}
+
+.calendartxt {
+    width: 100%;
+    display: inline-block;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.groupedItemsHome{
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
 /******************************************************************************/
 
 
 
 /*********************************profile**************************************/
+.profilePopUp{
+    display: inline-block;
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 10px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    /* color: white; */
+    background: rgba(208, 208, 208, 0.95);
+    /* background: rgba(0, 0, 0, 0.40); */
+}
+
+.picGroup {
+    display: inline-block;
+    background: inherit;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+}
+.userIconLarge{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: inline-block;
+    font-size: 60px;
+    color: white;
+}
+.innerCircle{
+        border-radius: 50%;
+        width: 90%;
+        height:90%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background: #a2a2a2;
+}
+
+.profileFormCon{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.editGroup{
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+}
+
+.editIconCon{
+    
+}
 /******************************************************************************/
 
 
 
 /*********************************register*************************************/
+
+.registerCon{
+    display: inline-block;
+    width: 100vw;
+    height: 100vh;
+    /*background: red;*/
+    position: relative;
+}
+
+.registerConPopUp{
+    display: inline-block;
+    position: fixed;
+    /*background: orange;*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 30px;
+    width: 800px;
+}
+
+
+.lineInputCon{
+    display: inline-block;
+    float: left;
+    text-align: center;
+    padding: 3px 0px;
+    padding-left: 10px;
+    position: relative;
+    }
+    
+
+.lineOneInputCon{
+
+    width: 50%;
+   
+}
+
+.lineOneInput{width: 100%;padding: 10px !important;}
+
+
+
+        
+        
+.lineThreeInputCon_1{    width: 20%;
+}
+    .lineThreeInputCon_2{    width: 80%;
+}
+        .lineThreeInputCon_3{width: 100%;}
+           
+.lineFiveInputCon{width: 33.3%;}
+
+
+.registerFromBtnsCon {
+    text-align: center;
+}
+.registerFromBtns{
+    width: 70%;
+}
+.registerFormCon{
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.registerorLabel:after{
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.personFormGroup{
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 15px;
+    /* border: 1px solid white; */
+    /* border-radius: 5px; */
+    /* background: #c7c7c7; */
+    padding: 0px 10px;
+}
+
+.personFromGroupTitle{
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    position: relative;
+    /* top: -10px; */
+    /* background: inherit; */
+    padding: 10px 0px;
+    /* border-bottom: 1px solid white; */
+}
+
+
+.readModeGroup{
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+}
+.readModeLabel{
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.readModeInput{}
+
+.usertakenIcons {
+    display: inline-block;
+}
+.usertaken{
+    color: red;
+}
+.userFree{
+    color: green;
+}
+.userTakenCon{
+    position: absolute;
+    top: 25px;
+    right: 5px;
+    transform: translateY(-50%);
+}
 /******************************************************************************/
 
 
@@ -53,7 +487,7 @@
     display: flex;
     justify-content: center;
     align-items: stretch;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 .userSearchCon{
     display: inline-block;
@@ -63,14 +497,17 @@
     /* border: 1px solid black; */
     border-radius: 5px;
     padding-top: 25px;
+    width: 50%;
 }
 .searchEventContactInput{
     flex-grow: 1;
-    margin-right: 5px;
+    /* margin-right: 5px; */
 }
 .searchEventContactForm{
     padding: 10px 0px;
     display: flex;
+    z-index: 10;
+    position: relative;
 }
 
 .eventDetailsCon{
@@ -80,6 +517,7 @@
     /* border: 1px solid rgb(208, 208, 208); */
     border-radius: 5px;
     padding: 25px 35px 25px 25px;
+    width: 50%;
 }
 .eventDetailsCon input, .eventDetailsCon textarea{
     width: 100%;
@@ -133,6 +571,86 @@ padding: 10px;
 }
 
 .createbtnCon{
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+}
+
+.eventForm_GuestSearch{
+    display: inline-block;
+    position: relative;
+    top: -15px;
+    z-index: 5;
+    width: 100%;
+}
+
+.eventForm_GuestdataList{
     
+}
+
+.eventForm_guestlistBtn{}
+
+.eventForm_guestListName{}
+
+.eventForm_guestListCon{}
+
+ul{
+        padding: 0;
+}
+
+.eventForm_InvitedTitle{
+   font-size: 14px !important;
+   font-weight: bold;
+   width: 100%;
+}
+
+.eventForm_InvitedGuest{
+    /* width: 100%; */
+    /* float: left; */
+    /* display: inline-block; */
+    position: relative;
+    top: -15px;
+}
+
+
+.eventForm_InvitedGuesDataList{
+}
+.eventForm_InvitedGuesDataList .ui-datalist-content, .eventForm_InvitedGuesDataList .ui-widget-content{
+    border: none !important;
+    padding: 0 1em !important;
+}
+.busyUsercon{
+    display: inline-block;
+    position: relative;
+}
+
+.busyUserconIcon{
+        position: relative;
+    top: 40%;
+    transform: translateY(-50%);
+}
+.eventCreateErrorCon{
+    display: inline-block;
+    width: 100%;
+}
+.eventCreateError{
+    width: 100%;
+    padding: 0;
+}
+/******************************************************************************/
+
+
+
+/**********************************upcomingevents**************************************/
+
+.upcommingEventsSchedule{
+    width: 80%;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.fc-toolbar.fc-header-toolbar{
+    color: white !important;
 }
 /******************************************************************************/

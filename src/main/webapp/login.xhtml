@@ -5,40 +5,54 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Sign In</title>
-        <style>
-            .formdiv {
-               margin: 0 auto;
-            }
-        </style>
     </h:head>
+    
+        <style>
+        @import url('https://fonts.googleapis.com/css?family=Overpass');
+    </style>
+    
     <h:body>
+    <h:outputStylesheet name="main.css"/>
+    
+        <h:panelGroup class="mainLogin">
 
+        <h:panelGroup class="mainLoginCon">
 
+            <span class="logintitle">Member Login</span>
         <h:form id="loginForm">
- 
-                    <h:panelGrid id="loginGrid" class="formdiv" columns="2" cellpadding="5">
-                        <p:outputLabel for="username" value="Username:" />
-                        <h:panelGroup>
-                            <p:inputText id="username"  value="#{loginCtrlMain.username}" required="true"
-                             requiredMessage="Please enter your Username:"/>
-                             <p:message for="username" />
+                   <h:panelGroup class="loginFormCon">
+
+                       <h:panelGroup class="loginInput">
+                            <p:inputText id="username"  class="usernameInput" value="#{loginCtrlMain.username}" required="true"
+                                         requiredMessage="Please enter your Username:" placeholder="Username"/>
+                            <p:message  class="errorMsg" for="username" />
                         </h:panelGroup>
 
+                       <h:panelGroup class="loginInput">
+                            <p:password id="passwordInput"  class="passwordInput" value="#{loginCtrlMain.password}" required="true"  
+                                        requiredMessage="Please enter your Password" placeholder="Password"/>
+                            <p:message class="errorMsg" for="passwordInput" />
+                        </h:panelGroup>           
+                </h:panelGroup>
 
-                        <p:outputLabel for="passwordInput" value="Password:" />     
-                        <h:panelGroup>
-                            <p:password id="passwordInput"  value="#{loginCtrlMain.password}" required="true"  
-                            requiredMessage="Please enter your Password"/>
-                            <p:message for="passwordInput" />
-                        </h:panelGroup>
+            
+            
+                <h:panelGroup class="loginFormBtncon">
+                    <p:commandButton class="loginFormBtns" value="Sign In" update="loginForm" ajax="true" action="#{loginCtrlMain.validateUser()}"/>
+                </h:panelGroup>
 
 
-                        <p:commandButton value="Sign In" update="loginGrid" ajax="true" action="#{loginCtrlMain.validateUser()}"/>
-                                <p:commandButton value="Register" immediate="true" action="#{loginCtrlMain.gotoregisterpage()}"/>
+                <span class="orLabel"> <span class="orText">or</span></span>
 
-                    </h:panelGrid>
-                </h:form>
+                <h:panelGroup class="loginFormBtncon">
+                    <p:commandButton class="loginFormBtns" value="Register" immediate="true" action="#{loginCtrlMain.gotoregisterpage()}"/>
+                </h:panelGroup>
 
+
+</h:form>
+</h:panelGroup>
+
+</h:panelGroup>
 
 
     </h:body>

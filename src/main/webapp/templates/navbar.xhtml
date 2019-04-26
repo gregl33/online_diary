@@ -5,25 +5,32 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Overpass');
+    </style>
+    
     <h:outputStylesheet name="main.css"/>
     
     <h:panelGroup class="navCon">
         <h:form>  
             <p:growl id="messages"/>
-            <p:menubar>
-                <p:menuitem value="Home" action="#{homeCtrl.goHome()}" icon="fa fa-home"/>
+            <p:menubar >
+                <p:menuitem  value="Home" action="#{homeCtrl.goHome()}" icon="fa fa-home"/>
 
-                <p:menuitem value="Contacts" icon="fa fa-fw fa-users" action="#{searchCtrl.getAllUsers()}"/>
+                <p:menuitem value="Contacts" icon="fa fa-fw fa-users" action="#{searchCtrl.getAllUsers()}" oncomplete="contactTable"/>
 
-                <p:submenu label="Events" icon="fa fa-fw fa-calendar">
-                    <p:menuitem value="New" action="#{eventsCtrl.goEvents()}"/>
-                    <p:separator />
-                    <p:menuitem value="Upcoming" action="#{eventsCtrl.goUpcomingEvents()}"/>
-                </p:submenu>
+               
+                <p:menuitem icon="fa fa-fw fa-calendar" value="Events" action="#{eventsCtrl.goUpcomingEvents()}"/>
 
+                    
                 <p:menuitem value="Profile" action="#{personCtrl.getUserDetails()}" icon="fa fa-user"/>
 
+                
                 <f:facet name="options">
+                    <h:panelGroup class="welcomeUserTxt">
+                         <span>Welcome #{personCtrl.currentUser.firstname} </span>
+                    </h:panelGroup>
+                    
                     <p:commandButton value="Logout" icon="fa fa-sign-out" action="#{loginCtrlMain.loggout()}"/>
                 </f:facet>
             </p:menubar>

@@ -50,6 +50,13 @@ public class Event implements Serializable {
         this.guests = new ArrayList<>();
     }
 
+    public Event(Date someDate) {
+        this.guests = new ArrayList<>();
+        this.start_datetime = someDate;
+        this.end_datetime = new Date(someDate.getTime() + 3600 * 1000);
+
+    }
+
     
     
     public String getEvent_name() {

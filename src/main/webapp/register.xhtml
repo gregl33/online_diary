@@ -8,44 +8,50 @@
         <title>Register</title>
     </h:head>
 
-    
+        <style>
+        @import url('https://fonts.googleapis.com/css?family=Overpass');
+    </style>
     
     <h:body>
-        <h:form>
-            <h:panelGrid id="matchGrid">
-                <h:panelGroup>
+
+ <h:outputStylesheet name="main.css"/>
+
+            
+    <h:panelGroup class="registerCon mainLogin">
+
+            <h:panelGroup class="registerConPopUp mainLoginCon" >
+                <span class="logintitle">Member Register</span>
+
+                <h:form id="registerForm">
+                  <h:panelGroup class="registerFormCon" id="matchGrid">
                     <ui:include src="templates/personForm.xhtml">
                         <ui:param name="person" value="#{loginCtrlMain.newUser}" /> 
                         <ui:param name="address_" value="#{loginCtrlMain.newAddress}" /> 
                         <ui:param name="bean" value="#{loginCtrlMain}" /> 
+                        <ui:param name="renderePass" value="true" /> 
                     </ui:include>
                 </h:panelGroup>
-                 
-                <h:panelGrid columns="2">
-                <p:outputLabel for="pwd1" value="Password:" ></p:outputLabel>
-                <h:panelGroup>
-                    <p:password id="pwd1"  match="con_pwd1" 
-                    requiredMessage="Please enter your Password"
-                    label="Password 1" required="true" 
-                    validatorMessage="Passwords needs to match"
-                    value="#{loginCtrlMain.newUser.password}"
-                    ></p:password>
-                    <p:message for="pwd1" />
-                 </h:panelGroup>
-
-                <p:outputLabel for="con_pwd1" value="Verify password" ></p:outputLabel>
-                <h:panelGroup>
-                    <p:password id="con_pwd1" 
-                    requiredMessage="Please Verify your Password"
-                    label="con_password" required="true" ></p:password>
-                    <p:message for="con_pwd1" />
-                </h:panelGroup>
-                </h:panelGrid>
         
-                <p:commandButton update="matchGrid" value="Register" ajax="true" action="#{loginCtrlMain.registerUser()}"/>
+                <h:panelGroup class="loginFormBtncon registerFromBtnsCon">
+                    <p:commandButton class="loginFormBtns registerFromBtns" 
+                                     update="registerForm" value="Register" 
+                                      action="#{loginCtrlMain.registerUser()}"/>
+                </h:panelGroup>
+
+                <span class="orLabel registerorLabel"> <span class="orText">or</span></span>
+
+                <h:panelGroup class="loginFormBtncon registerFromBtnsCon">
+                    <p:commandButton class="loginFormBtns registerFromBtns" 
+                                     value="Sign In" ajax="true" immediate="true"
+                                     action="#{loginCtrlMain.gotologinPage()}"/>
+                </h:panelGroup>
                 
-            </h:panelGrid>
-        </h:form>
+                
+
+                </h:form>
+            </h:panelGroup>
+            </h:panelGroup>
+
     </h:body>
     
    

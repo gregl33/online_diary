@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,7 +9,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import project.onlinediary.ents.Event;
-import project.onlinediary.ents.Person;
 import project.onlinediary.pers.EventFacade;
 
 /**
@@ -25,6 +24,16 @@ public class EventService {
     
     public Event createEvent(Event e){
         ef.create(e);
+        return e;
+    }
+    
+    public Event updateEvent(Event e){
+        ef.edit(e);
+        return e;
+    }
+    
+    public Event deleteEvent(Event e){
+        ef.remove(e);
         return e;
     }
     

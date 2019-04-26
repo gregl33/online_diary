@@ -32,6 +32,7 @@ public class SearchCtrl implements Serializable{
     @EJB
     private PersonService ps;
 
+    private Person selectedPerson;
     
     @ManagedProperty(value="#{personCtrl}") 
     private PersonCtrl personCtrlBean;
@@ -60,15 +61,37 @@ public class SearchCtrl implements Serializable{
         this.personCtrlBean = personCtrlBean;
     }
     
-    
+    public void getAllPersons(){
+        setContactUsers(ps.getAllPerson());
+
+    }
     
     public String getAllUsers(){
-        this.setContactUsers(ps.getAllPerson());
+        setContactUsers(ps.getAllPerson());
         return "contacts?faces-redirect=true";
     }
     
     
     public void searchForContactsAjax(AjaxBehaviorEvent event){       
-        this.setContactUsers(ps.getPersonBy((String)((UIOutput)event.getSource()).getValue(),personCtrlBean.getCurrentUser().getId()));
+        setContactUsers(ps.getPersonBy((String)((UIOutput)event.getSource()).getValue(),personCtrlBean.getCurrentUser().getId()));
     }
+
+    public Person getSelectedPerson() {
+        return selectedPerson;
+    }
+
+    public void setSelectedPerson(Person selectedPerson) {
+        this.selectedPerson = selectedPerson;
+    }
+    
+    
+    
+    
+    
+    public void setSelectedDocument(Person selectedp) {
+        this.selectedPerson = selectedp;
+    }
+        
+        
+        
 }
