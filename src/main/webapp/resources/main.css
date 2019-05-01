@@ -24,7 +24,7 @@ font-family: 'Overpass', sans-serif;
     height: 100vh;
     width: 100vw;
     position: relative;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url(/onlineDiary/faces/javax.faces.resource/images/mainBack.jpg); /*url("/onlineDiary/faces/javax.faces.resource/images/mainBack.jpg")*/
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url("/gregLindert_onlineDiary/faces/javax.faces.resource/images/mainBack.jpg"); /*url("/gregLindert_onlineDiary/faces/javax.faces.resource/images/mainBack.jpg")*/
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -154,13 +154,6 @@ font-family: 'Overpass', sans-serif;
         
 }
 /******************************************************************************/
-
-
-
-/********************************personForm************************************/
-/******************************************************************************/
-
-
 
 
 /*********************************contact**************************************/

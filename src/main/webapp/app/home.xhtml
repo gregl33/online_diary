@@ -5,6 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
+        
+        
         <title>home</title>
         
         
@@ -20,8 +22,7 @@
        
         
     </h:head>
-    <h:body>    
-         
+    <h:body onload="#{personCtrl.init()}">         
         <h:panelGroup class="mainHome mainLogin ">
 
             <ui:include src="../templates/navbar.xhtml"></ui:include>
