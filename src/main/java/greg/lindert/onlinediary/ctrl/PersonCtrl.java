@@ -12,6 +12,7 @@ import org.primefaces.model.DefaultScheduleModel;
 import greg.lindert.onlinediary.bus.AddressService;
 import greg.lindert.onlinediary.bus.EventService;
 import greg.lindert.onlinediary.bus.PersonService;
+import greg.lindert.onlinediary.ents.Address;
 import greg.lindert.onlinediary.ents.Person;
 
 
@@ -175,5 +176,31 @@ public class PersonCtrl {
         }
         }
         
+    }
+    
+    
+    public void CreateTestUser(){
+        if(ps.checkUsername("user")){
+            Person tempPerson = new Person();      
+            tempPerson.setEmail("user.test@gmail.com");
+            tempPerson.setFirstname("User");
+            tempPerson.setLastname("Test");
+            tempPerson.setPassword("user");
+            tempPerson.setUsername("user");
+            tempPerson.setPhonenumber("01234567891");
+
+            Address tempAddress = new Address();
+            tempAddress.setAddress_line_1("Skyline Road");
+            tempAddress.setAddress_line_2("");
+            tempAddress.setHouse_name("1");
+            tempAddress.setCounty("Hampshire");
+            tempAddress.setTown("Portsmouth");
+            tempAddress.setPostcode("PO12 2RW");
+
+            tempAddress = as.createNewAddress(tempAddress);
+            tempPerson.setHome(tempAddress);
+
+            ps.createNewPerson(tempPerson);
+        }
     }
 }

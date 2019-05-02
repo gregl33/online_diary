@@ -63,6 +63,7 @@ public class SearchCtrl implements Serializable{
     }
     
     public String getAllUsers(){
+        personCtrlBean.setEditMode(false);
         setContactUsers(ps.getAllPerson());
         return "contacts?faces-redirect=true";
     }
@@ -77,12 +78,13 @@ public class SearchCtrl implements Serializable{
     }
 
     public void setSelectedPerson(Person selectedPerson) {
+        personCtrlBean.setEditMode(false);
         this.selectedPerson = selectedPerson;
     }
     
-    public void setSelectedDocument(Person selectedp) {
-        this.selectedPerson = selectedp;
-    }
+//    public void setSelectedDocument(Person selectedp) {
+//        this.selectedPerson = selectedp;
+//    }
         
         
         

@@ -11,10 +11,15 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <style>
-                   .linkCon{
+             div {
+                box-sizing: border-box;
+                display: inline-block;
+            }
+                         .linkCon{
                 padding: 15px;
                 font-size: 20px;
-                margin: 10px;
+                /* margin: 10px; */
+                width: 100%;
             }
             
             .link_a {
@@ -25,6 +30,8 @@ and open the template in the editor.
                   text-transform: capitalize;
                   border-radius: 5px;
                   text-align: center;
+                  width: 80%;
+                  display: inline-block;
             }
 
                 .link_a:active {
@@ -40,12 +47,24 @@ and open the template in the editor.
                   background-color: #042f52;
                 }
             
+                .startCon{
+                    padding: 10px;
+                    width: 100%;
+                    font-size: 18px;
+                }
+                .mainPageCon{
+                    width: 50%;
+                    float: left;
+                }
+            
             
         </style>
     </head>
     <body>
-        
-        <h1>Online Diary Web Application</h1>
+        <h1 style="text-align: center;">Online Diary Web Application</h1>
+
+  
+        <div class="mainPageCon" style="width: 25%;">
         
                 <div class="linkCon">
                     <a href="http://localhost:8080/gregLindert_onlineDiary/faces/app/home.xhtml" class="link_a">Web Application</a>
@@ -66,7 +85,37 @@ and open the template in the editor.
                 <div class="linkCon">
                     <a href="http://localhost:8080/gregLindert_onlineDiary/web/site/apidocs/index.html" class="link_a">Javadoc</a>
                 </div>
+        </div>
         
+      <div class="mainPageCon">
+
+        <h2 >Web App's first time use</h2>
+        <div class="startCon">
+            By clicking on 'Web Application' button, you will redirected to the 
+            home page, if you are not logged in, you will be redirected to the
+            login page. If it is your first time visiting the page, a new user will be 
+            automatically populated and then you will be able to login  
+            with the newly created account, with username and password of 'user', 
+            or register for a new account.
+            <br><br>
+            Once you login you will find yourself on Home Page and find that 
+            usage of this app is really  easy, on top of each page there is navigation bar. 
+            <br><br>
+            You can access your profile and update it by clicking on 'Profile'. 
+            <br><br>
+            To create an event click on an empty time slot on 'Home' page day agenda 
+            or on any day on the calendar displayed on the 'Events' page. You will 
+            them be displayed with a pop up form to create an event. You can also 
+            click on existing event to check see more details about them, 
+            and if you are the owner of them you can also edit or delete them. 
+            <br><br>
+             To search and view registered  users click on 'Contacts' page. 
+             You will them see all registered users, you can also search for a 
+             specific user, you will notice that there is no search button, that's 
+             because as you type the search is conducted.You can also click on the 
+             Magnifying Glass Icon to see more details about a user. 
+        </div>
+      </div>
 
     </body>
 </html>
